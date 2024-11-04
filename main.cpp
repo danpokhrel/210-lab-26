@@ -1,4 +1,4 @@
-// COMSC-210 | Lab 25 | Dan Pokhrel
+// COMSC-210 | Lab 26 | Dan Pokhrel
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -12,11 +12,12 @@ using namespace std;
 using namespace std::chrono;
 
 const int CODES_SZ = 20000;
-const int ROWS = 4, COL = 3;
+const int ROWS = 4, COL = 3, ITER = 15;
 
 // Prototypes
 high_resolution_clock::time_point time_start();
 int time_end(high_resolution_clock::time_point start);
+void run_tests(string codes[CODES_SZ], vector<string> &vec, list<string> &lis, set<string> &se, int results[ROWS][COL]);
 
 int main() {
     vector<string> vec;
@@ -34,6 +35,36 @@ int main() {
         i++;
     }
 
+    run_tests(codes, vec, lis, se, results);
+
+    // Output
+
+    cout << " Operation    Vector      List       Set\n";
+
+    cout << setw(10) << "Read";
+    cout << setw(10) << results[0][0]
+        << setw(10) << results[0][1]
+        << setw(10) << results[0][2] << endl;
+
+    cout << setw(10) << "Sort";
+    cout << setw(10) << results[1][0]
+        << setw(10) << results[1][1]
+        << setw(10) << results[1][2] << endl;
+
+    cout << setw(10) << "Insert";
+    cout << setw(10) << results[2][0]
+        << setw(10) << results[2][1]
+        << setw(10) << results[2][2] << endl;
+
+    cout << setw(10) << "Delete";
+    cout << setw(10) << results[3][0]
+        << setw(10) << results[3][1]
+        << setw(10) << results[3][2] << endl;
+
+    return 0;
+}
+
+void run_tests(string codes[CODES_SZ], vector<string> &vec, list<string> &lis, set<string> &se, int results[ROWS][COL]){
     // read
 
     auto start = time_start();
@@ -114,32 +145,6 @@ int main() {
     se.erase("eohGGM1Q");
     // ---------------------------------------------------------------
     results[3][2] = time_end(start);
-
-    // Output
-
-    cout << " Operation    Vector      List       Set\n";
-
-    cout << setw(10) << "Read";
-    cout << setw(10) << results[0][0]
-        << setw(10) << results[0][1]
-        << setw(10) << results[0][2] << endl;
-
-    cout << setw(10) << "Sort";
-    cout << setw(10) << results[1][0]
-        << setw(10) << results[1][1]
-        << setw(10) << results[1][2] << endl;
-
-    cout << setw(10) << "Insert";
-    cout << setw(10) << results[2][0]
-        << setw(10) << results[2][1]
-        << setw(10) << results[2][2] << endl;
-
-    cout << setw(10) << "Delete";
-    cout << setw(10) << results[3][0]
-        << setw(10) << results[3][1]
-        << setw(10) << results[3][2] << endl;
-
-    return 0;
 }
 
 high_resolution_clock::time_point time_start(){
