@@ -23,7 +23,8 @@ int main() {
     vector<string> vec;
     list<string> lis;
     set<string> se;
-    int results[ITER+1][ROWS][COL]; // Averaged values stores at ITER+1
+    int results[ITER][ROWS][COL];
+    float avg_results[ROWS][COL];
 
     // read file
     ifstream fin("codes.txt");
@@ -45,34 +46,34 @@ int main() {
     }
 
     // Compute averages
-    for (int type = 0; type < ROWS; type++)
-    for (int i = 0; i < ITER; i++){
-        
+    for (int test = 0; test < ROWS; test++)
+    for (int type = 0; type < COL; type++){
+        float avg = 0;
+        for (int i = 0; i < ITER; i++)
+            avg += results[i][test][type];
+        avg = avg / ITER;
+        avg_results[test][type] = avg;
     }
 
     // Output
     cout << "Number of simulations: " << ITER << endl;
     cout << " Operation    Vector      List       Set\n";
-
     cout << setw(10) << "Read";
-    cout << setw(10) << results[0][0][0]
-        << setw(10) << results[0][0][1]
-        << setw(10) << results[0][0][2] << endl;
-
+    cout << setw(10) << avg_results[0][0]
+        << setw(10) << avg_results[0][1]
+        << setw(10) << avg_results[0][2] << endl;
     cout << setw(10) << "Sort";
-    cout << setw(10) << results[0][1][0]
-        << setw(10) << results[0][1][1]
-        << setw(10) << results[0][1][2] << endl;
-
+    cout << setw(10) << avg_results[1][0]
+        << setw(10) << avg_results[1][1]
+        << setw(10) << avg_results[1][2] << endl;
     cout << setw(10) << "Insert";
-    cout << setw(10) << results[0][2][0]
-        << setw(10) << results[0][2][1]
-        << setw(10) << results[0][2][2] << endl;
-
+    cout << setw(10) << avg_results[2][0]
+        << setw(10) << avg_results[2][1]
+        << setw(10) << avg_results[2][2] << endl;
     cout << setw(10) << "Delete";
-    cout << setw(10) << results[0][3][0]
-        << setw(10) << results[0][3][1]
-        << setw(10) << results[0][3][2] << endl;
+    cout << setw(10) << avg_results[3][0]
+        << setw(10) << avg_results[3][1]
+        << setw(10) << avg_results[3][2] << endl;
 
     return 0;
 }
