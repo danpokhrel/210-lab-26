@@ -58,6 +58,7 @@ int main() {
     // Output
     cout << "Number of simulations: " << ITER << endl;
     cout << " Operation    Vector      List       Set\n";
+    cout << fixed << setprecision(1);
     cout << setw(10) << "Read";
     cout << setw(10) << avg_results[0][0]
         << setw(10) << avg_results[0][1]
